@@ -4,4 +4,23 @@ package testnet.aggregation;
 option go_package = "testnet/x/aggregation/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc AggregatePrice (MsgAggregatePrice) returns (MsgAggregatePriceResponse);
+}
+
+message PriceInput {
+  string creator = 1;
+  string source  = 2;
+  uint64 timestamp = 3;
+  uint64 price = 4;
+}
+
+message MsgAggregatePrice {
+  repeated PriceInput prices = 1;
+}
+
+message MsgAggregatePriceResponse {
+  uint64 id = 1;
+}
+
+
