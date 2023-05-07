@@ -9,14 +9,14 @@ service Msg {
 }
 
 message PriceInput {
-  string creator = 1;
-  string source  = 2;
-  uint64 timestamp = 3;
-  uint64 price = 4;
+  string source  = 1;
+  uint64 timestamp = 2;
+  uint64 price = 3;
 }
 
 message MsgAggregatePrice {
-  repeated PriceInput prices = 1;
+  string creator = 1;
+  repeated PriceInput prices = 2;
 }
 
 message MsgAggregatePriceResponse {

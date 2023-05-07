@@ -12,24 +12,27 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdCreatePost() *cobra.Command {
+func CmdAggregatePrice() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-post [title] [body]",
-		Short: "Broadcast message create-post",
+		Use:   "aggregate-price [prices]",
+		Short: "Broadcast message aggregate-price",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argTitle := args[0]
-			argBody := args[1]
+      var msg types.MsgAggregatePrice
+
+      err := json.Unmarshal([]byte(args[0]), &msg)
+      if err != nil {
+        return err
+      }
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgCreatePost(
+			msg := types.NewMsgAggregatePrice(
 				clientCtx.GetFromAddress().String(),
-				argTitle,
-				argBody,
+        msg.Prices,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
