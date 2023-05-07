@@ -1,0 +1,12 @@
+syntax = "proto3";
+package testnet.aggregation;
+
+import "gogoproto/gogo.proto";
+import "testnet/aggregation/params.proto";
+
+option go_package = "testnet/x/aggregation/types";
+
+// GenesisState defines the aggregation module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

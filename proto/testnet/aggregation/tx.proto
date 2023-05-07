@@ -1,0 +1,7 @@
+syntax = "proto3";
+package testnet.aggregation;
+
+option go_package = "testnet/x/aggregation/types";
+
+// Msg defines the Msg service.
+service Msg {}
