@@ -14,17 +14,16 @@ func (k msgServer) AggregatePrice(goCtx context.Context, msg *types.MsgAggregate
 	var sources string
 	var priceSum uint64
 	for _, price := range msg.Prices {
-		sources += price.Source
+		sources += price.Source + ", "
 		priceSum += price.Price
 	}
-
-	var timestamp uint64 = 1233
+  sources = sources[:len(sources)-2]
 
 	var price = types.Price{
 		Creator: msg.Creator,
 		Source:  sources,
 		Price:   priceSum / uint64(len(msg.Prices)),
-    Timestamp: timestamp,
+    Timestamp: msg.Timestamp,
 	}
 	id := k.AppendPrice(
 		ctx,

@@ -71516,9 +71516,6 @@ definitions:
     properties:
       source:
         type: string
-      timestamp:
-        type: string
-        format: uint64
       price:
         type: string
         format: uint64

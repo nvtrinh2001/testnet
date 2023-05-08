@@ -10,13 +10,13 @@ service Msg {
 
 message PriceInput {
   string source  = 1;
-  uint64 timestamp = 2;
-  uint64 price = 3;
+  uint64 price = 2;
 }
 
 message MsgAggregatePrice {
   string creator = 1;
-  repeated PriceInput prices = 2;
+  uint64 timestamp = 2;
+  repeated PriceInput prices = 3;
 }
 
 message MsgAggregatePriceResponse {

@@ -17,7 +17,7 @@ func CmdAggregatePrice() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "aggregate-price [prices]",
 		Short: "Broadcast message aggregate-price",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			var prices []*types.PriceInput
 
@@ -31,8 +31,11 @@ func CmdAggregatePrice() *cobra.Command {
 				return err
 			}
 
+      timestamp, err := strconv.ParseUint(args[1], 10, 64)
+
 			msg := types.NewMsgAggregatePrice(
 				clientCtx.GetFromAddress().String(),
+        timestamp,
 				prices,
 			)
 			if err := msg.ValidateBasic(); err != nil {

@@ -9,9 +9,10 @@ const TypeMsgAggregatePrice = "aggregate_price"
 
 var _ sdk.Msg = &MsgAggregatePrice{}
 
-func NewMsgAggregatePrice(creator string, prices []*PriceInput) *MsgAggregatePrice {
+func NewMsgAggregatePrice(creator string, timestamp uint64, prices []*PriceInput) *MsgAggregatePrice {
 	return &MsgAggregatePrice{
 		Creator: creator,
+    Timestamp: timestamp,
 		Prices:  prices,
 	}
 }
