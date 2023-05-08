@@ -1,26 +1,45 @@
 syntax = "proto3";
+
 package testnet.aggregation;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "testnet/aggregation/params.proto";
+import "testnet/aggregation/price.proto";
 
 option go_package = "testnet/x/aggregation/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/testnet/aggregation/params";
+  
+  }
+  
+  // Queries a list of ShowPrice items.
+  rpc ShowPrice (QueryShowPriceRequest) returns (QueryShowPriceResponse) {
+    option (google.api.http).get = "/testnet/aggregation/show_price/{id}";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryShowPriceRequest {
+  uint64 id = 1;
+}
+
+message QueryShowPriceResponse {
+  Price price = 1 [(gogoproto.nullable) = false];
+}
+

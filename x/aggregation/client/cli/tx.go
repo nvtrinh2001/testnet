@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-  "testnet/x/aggregation/types"
+	"testnet/x/aggregation/types"
 )
 
 var (
@@ -35,4 +35,3 @@ func GetTxCmd() *cobra.Command {
 
 	return cmd
 }
-

@@ -7,7 +7,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
-  "testnet/x/aggregation/types"
+	"testnet/x/aggregation/types"
+  "encoding/json"
 )
 
 var _ = strconv.Itoa(0)
@@ -18,12 +19,12 @@ func CmdAggregatePrice() *cobra.Command {
 		Short: "Broadcast message aggregate-price",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-      var msg types.MsgAggregatePrice
+			var prices []*types.PriceInput
 
-      err := json.Unmarshal([]byte(args[0]), &msg)
-      if err != nil {
-        return err
-      }
+			err = json.Unmarshal([]byte(args[0]), &prices)
+			if err != nil {
+				return err
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -32,7 +33,7 @@ func CmdAggregatePrice() *cobra.Command {
 
 			msg := types.NewMsgAggregatePrice(
 				clientCtx.GetFromAddress().String(),
-        msg.Prices,
+				prices,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

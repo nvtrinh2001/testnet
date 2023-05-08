@@ -12,6 +12,10 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_aggregation"
+
+	PriceKey = "Price/value/"
+
+	PriceCountKey = "Price/count/"
 )
 
 func KeyPrefix(p string) []byte {
